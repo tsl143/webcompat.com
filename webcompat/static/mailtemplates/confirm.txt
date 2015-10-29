@@ -1,0 +1,13 @@
+Hello,
+you are attempting to subscribe to new issues reported on webcompat.com
+regarding {domain}, right? If you are, please click this link to confirm
+your subscription:
+
+https://webcompat.com/subscribe?confirm={secret}
+
+If you did not request a subscription, please let us know. We try to prevent
+abuse of our site, although it is not possible to block everything.
+
+--
+Greetings from the webcompat.com team
+https://webcompat.com

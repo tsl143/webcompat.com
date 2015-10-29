@@ -9,6 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
+from sqlalchemy import DateTime
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy.orm import scoped_session
@@ -24,6 +25,27 @@ session_engine = create_engine('sqlite:///' + os.path.join(app.config['BASE_DIR'
 session_db = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=session_engine))
+
+UsersBase = declarative_base()
+UsersBase.query = session_db.query_property()
+
+
+class User(UsersBase):
+    __tablename__ = 'users'
+
+    user_id = Column(String(128), unique=True, primary_key=True)
+    access_token = Column(String(128), unique=True)
+
+    def __init__(self, access_token):
+        self.access_token = access_token
+        # We use the user_id in the session cookie to identify auth'd users.
+        # Here we salt and hash the GitHub access token so you can't get
+        # back to the auth token if the session cookie was ever compromised.
+        self.user_id = sha512(access_token + uuid4().hex).hexdigest()[0:128]
+
+
+UsersBase.metadata.create_all(bind=session_engine)
+
 issue_engine = create_engine('sqlite:///' + os.path.join(app.config['BASE_DIR'],
                                                    'issues.db'))
 
@@ -49,22 +71,30 @@ class WCIssue(IssueBase):
 
 IssueBase.metadata.create_all(bind=issue_engine)
 
-UsersBase = declarative_base()
-UsersBase.query = session_db.query_property()
+mailsub_engine = create_engine('sqlite:///' + os.path.join(app.config['BASE_DIR'],
+                                                   'mailsub.db'))
 
+mailsub_db = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=mailsub_engine))
 
-class User(UsersBase):
-    __tablename__ = 'users'
+MailsubBase = declarative_base()
+MailsubBase.query = issue_db.query_property()
 
-    user_id = Column(String(128), unique=True, primary_key=True)
-    access_token = Column(String(128), unique=True)
+class MailSubscriber(MailsubBase):
+    __tablename__ = 'webcompat_subscribers'
 
-    def __init__(self, access_token):
-        self.access_token = access_token
-        # We use the user_id in the session cookie to identify auth'd users.
-        # Here we salt and hash the GitHub access token so you can't get
-        # back to the auth token if the session cookie was ever compromised.
-        self.user_id = sha512(access_token + uuid4().hex).hexdigest()[0:128]
+    row_id = Column(String(128), unique=True, primary_key=True)
+    domain = Column(String(256))
+    mail = Column(String(256))
+    secret = Column(String(40), unique=True)
+    confirmed_timestamp = Column(DateTime)
+    failures = Column(Integer)
 
+    def __init__(self, domain, mail):
+        self.domain = domain
+        self.mail = mail
+        self.secret = sha512(uuid4().hex).hexdigest()[-40:]
+        self.failures = 0
 
-UsersBase.metadata.create_all(bind=session_engine)
+MailsubBase.metadata.create_all(bind=issue_engine)

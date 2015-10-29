@@ -15,10 +15,13 @@ from flask.ext.github import GitHubError
 from flask import g
 from flask import request
 from flask import session
-
+from sqlalchemy import func
+from sqlalchemy import update
 from webcompat import app
 from webcompat import github
 from webcompat import limiter
+from webcompat.db import mailsub_db
+from webcompat.db import MailSubscriber
 from webcompat.helpers import mockable_response
 from webcompat.helpers import get_comment_data
 from webcompat.helpers import get_headers
@@ -26,7 +29,7 @@ from webcompat.helpers import get_request_headers
 from webcompat.helpers import normalize_api_params
 from webcompat.issues import filter_new
 from webcompat.issues import proxy_request
-
+from webcompat.mail import confirm_new_subscription
 
 api = Blueprint('api', __name__, url_prefix='/api')
 JSON_MIME = 'application/json'
@@ -289,3 +292,29 @@ def get_rate_limit():
     else:
         rl = proxy_request('get', uri=rate_limit_uri, headers=request_headers)
     return rl.content
+
+
+@api.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+    '''XHR endpoint to subscribe to new issues on a per-domain basis.
+
+        Accepts POST requests with domain and mail arguments
+    '''
+    if request.method == 'POST':
+        mail = request.form['mail']
+        domain = request.form['domain']
+        if mail and domain:
+            newsub = MailSubscriber(domain, mail)
+            mailsub_db.add(newsub)
+            mailsub_db.commit()
+            confirm_new_subscription(domain, mail, newsub.secret)
+            return ('OK', 200, {'content-type': 'text/plain'})
+        else:
+            # Something wrong with POST data - Bad request error
+            abort(400)
+    elif request.method == 'GET':
+        if request.args['secret']:
+            stmt = update(mailsub_db).\
+                where(mailsub_db.webcompat_subscribers.secret==request.args['secret']).\
+                values(confirmed_timestamp = func.now())
+
