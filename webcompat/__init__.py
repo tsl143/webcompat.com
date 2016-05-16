@@ -7,7 +7,6 @@
 '''This module powers the webcompat.com Flask application.'''
 
 import logging
-import os
 
 from flask.ext.github import GitHub
 from flask.ext.limiter import Limiter
@@ -28,14 +27,15 @@ import webcompat.views
 # register blueprints
 from api.endpoints import api
 from api.uploads import uploads
+from error_handlers import error_handlers
 from webhooks import webhooks
 
-for blueprint in [api, uploads, webhooks]:
+for blueprint in [api, error_handlers, uploads, webhooks]:
     app.register_blueprint(blueprint)
 
 
 # Start Logging Handlers
-# See config.py for parameters
+# See config/__init__.py for parameters
 file_handler = logging.FileHandler(app.config['LOG_FILE'])
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(logging.Formatter(app.config['LOG_FMT']))

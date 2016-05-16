@@ -1,3 +1,19 @@
+## 2.4.10 - 2016-05-04
+
+* Clear out screenshotData in showRemoveUpload [Pull #1040](https://github.com/webcompat/webcompat.com/pull/1040) [Issue #1039](https://github.com/webcompat/webcompat.com/issues/1039)
+* Downscale large images that come from the add-on [Pull #1041](https://github.com/webcompat/webcompat.com/pull/1041) [Issue #1012](https://github.com/webcompat/webcompat.com/issues/1012)
+
+## 2.4.9 - 2016-05-03
+
+* Fix button style on contributor page [Pull #1021](https://github.com/webcompat/webcompat.com/pull/1021) [Issue #1005](https://github.com/webcompat/webcompat.com/issues/1005)
+* Remove crappy search tests that always fail [Pull #1029](https://github.com/webcompat/webcompat.com/pull/1029) [Issue #890](https://github.com/webcompat/webcompat.com/issues/890)
+* More robust UA parsing [Pull #1032](https://github.com/webcompat/webcompat.com/pull/1032) [Issue #1030](https://github.com/webcompat/webcompat.com/issues/1030)
+* Add MPL 2.0 license to package.json [Pull #1038](https://github.com/webcompat/webcompat.com/pull/1038) [Issue #977](https://github.com/webcompat/webcompat.com/issues/977)
+
+## 2.4.8 - 2016-04-28
+
+* Add speculative exception logging to figure out #1009. [Pull #1028](https://github.com/webcompat/webcompat.com/pull/1028) [Issue #1027](https://github.com/webcompat/webcompat.com/issues/1027)
+
 ## 2.4.7 - 2016-04-27
 
 * Change font-family in comment textareas [Pull #1022](https://github.com/webcompat/webcompat.com/pull/1022) (No Issue)
