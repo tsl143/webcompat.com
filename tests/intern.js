@@ -36,9 +36,11 @@ define(['intern/lib/args'], function(args) {
 
     // Browser versions may have dependencies on browserstack.selenium_version
     environments: [
-      { browserName: 'firefox', version: '44', platform: 'MAC' },
-      { browserName: 'chrome', version: '49', platform: 'MAC' },
-      { browserName: 'internet explorer', version: '11', platform: 'WIN8' }
+      //{ browserName: 'firefox', version: '44', platform: 'MAC' },
+      //{ browserName: 'chrome', version: '49', platform: 'MAC' },
+      { browserName : 'iPhone', platform : 'MAC', device : 'iPhone 6'},
+      { browserName : 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'}
+      //{ browserName: 'internet explorer', version: '11', platform: 'WIN8' }
     ],
 
     // BrowserStack connection
