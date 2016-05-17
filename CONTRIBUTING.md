@@ -28,6 +28,7 @@ You are welcome to contribute to this project. Here are the guidelines we try to
 * [Writing Tests](#writing-tests)
   * [Python Unit Tests](#python-unit-tests)
   * [JS Functional Tests](#js-functional-tests)
+* [Configuring Tests](#configuring-tests)
 * [Production Server Setup](#production-server-setup)
 * [Acknowledgements](#acknowledgements)
 
@@ -489,6 +490,27 @@ Important documentation links:
 * [Intern wiki](https://github.com/theintern/intern/wiki): contains useful examples.
 
 It's also recommended to look at the other test files in the `tests/functional` directory to see how things are commonly done.
+
+## Configuring Tests
+
+To add test environments (new OS/Browser/version) to the intern.js configuration, use the [BrowserStack javascript generator](https://www.browserstack.com/automate/node#configure-capabilities). Note that you might need to revise the output javascript object to the format used by intern.js.
+
+For ex.
+```
+var capabilities = {
+ 'browserName' : 'android',
+ 'platform' : 'ANDROID',
+ 'device' : 'Samsung Galaxy S5'
+}
+```
+
+should become
+
+```
+{browserName : 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'}
+```
+
+and the object should be added to the intern.js, environments array.
 
 ## Production Server Setup
 
