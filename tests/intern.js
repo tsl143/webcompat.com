@@ -28,7 +28,7 @@ define(['intern/lib/args'], function(args) {
 
     // BrowserStack Selenium version
     capabilities: {
-      'browserstack.selenium_version': '2.52.0'
+      'browserstack.selenium_version': '2.53.0' //'2.52.0'
     },
 
     // BrowserStack hard-coded max number of simultaneous browser tests
@@ -36,11 +36,12 @@ define(['intern/lib/args'], function(args) {
 
     // Browser versions may have dependencies on browserstack.selenium_version
     environments: [
-      //{ browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'El Capitan' },
-      //{ browser: 'chrome', browser_version: '49', os : 'OS X', os_version : 'El Capitan' },
-      { browser: 'Safari', browser_version : '9.1', os : 'OS X', os_version : 'El Capitan' },
-      { browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'El Capitan'},
-      { browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '10' }
+      //{ browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'Yosemite' },
+      //{ browser: 'chrome', browser_version: '49', os : 'OS X', os_version : 'Yosemite' },
+      { browser: 'Safari', browser_version : '8.0', os : 'OS X', os_version : 'Yosemite' },
+      //{ browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'Yosemite'},
+      { browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '8.1' } //,
+      //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '10' },
       //{ browserName : 'iPhone', platform : 'MAC', device : 'iPhone 6'},
       //{ browserName : 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'}
     ],
