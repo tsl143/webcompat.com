@@ -36,11 +36,11 @@ define(['intern/lib/args'], function(args) {
 
     // Browser versions may have dependencies on browserstack.selenium_version
     environments: [
-      //{ browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'Yosemite' },
-      //{ browser: 'chrome', browser_version: '49', os : 'OS X', os_version : 'Yosemite' },
-      { browser: 'Safari', browser_version : '8.0', os : 'OS X', os_version : 'Yosemite' },
-      //{ browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'Yosemite'},
-      { browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '8.1' } //,
+      { browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'Yosemite' },
+      { browser: 'chrome', browser_version: '49', os : 'OS X', os_version : 'Yosemite' },
+      //{ browser: 'Safari', browser_version : '8.0', os : 'OS X', os_version : 'Yosemite' },
+      { browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'Yosemite'}//,
+      //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '8.1' },
       //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '10' },
       //{ browserName : 'iPhone', platform : 'MAC', device : 'iPhone 6'},
       //{ browserName : 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'}
