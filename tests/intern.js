@@ -42,10 +42,11 @@ define(['intern/lib/args'], function(args) {
       //{ browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'Yosemite'}//,
       //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '8.1' },
       //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '10' },
-      { browser: 'iPhone', platform: 'MAC', device: 'iPhone 6S'},
-      { browser: 'iPad', platform: 'MAC', device: 'iPad Pro'},
-      { browser: 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'},
-      { browser: 'android', platform: 'ANDROID', device: 'Google Nexus 5'}
+      //{ browser: 'iPhone', platform: 'MAC', device: 'iPhone 6S'},
+      //{ browser: 'iPad', platform: 'MAC', device: 'iPad Pro'},
+      { browser: 'android', platform: 'ANDROID', device: 'Samsung Galaxy Tab 4 10.1'}//,
+      //{ browser: 'android', platform : 'ANDROID', device : 'Samsung Galaxy S5'},
+      //{ browser: 'android', platform: 'ANDROID', device: 'Google Nexus 5'}
     ],
 
     // BrowserStack connection
