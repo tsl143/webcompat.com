@@ -37,8 +37,7 @@ define(['intern/lib/args'], function(args) {
     // Browser versions may have dependencies on browserstack.selenium_version
     environments: [
       //{ browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'Yosemite' },
-      {platform: 'MAC', browserName: 'chrome', version: 50, os: 'OS X', os_version: 'El Capitan', browser: 'Chrome', browser_version: 50}
-      //{ browserName: 'chrome', browser_version: '49', os : 'OS X', os_version : 'Yosemite' }//,
+      { browser: 'chrome', browser_version: '50', os : 'OS X', os_version : 'El Capitan' }//,
       //{ browser: 'Safari', browser_version : '8.0', os : 'OS X', os_version : 'Yosemite' },
       //{ browser: 'Opera', browser_version: '12.15', os: 'OS X', os_version: 'Yosemite'}//,
       //{ browser: 'IE', browser_version: '11.0', os: 'Windows', os_version: '8.1' }//,
