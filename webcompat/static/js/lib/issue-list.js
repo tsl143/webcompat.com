@@ -440,6 +440,9 @@ issueList.IssueView = Backbone.View.extend(
         var kvArray = param.split('=');
         var key = kvArray[0];
         var value = kvArray[1];
+        if (decodeURIComponent(value) !== value) {
+          value = decodeURIComponent(value);
+        }
         this.issues.params[key] = value;
       }, this));
     },
