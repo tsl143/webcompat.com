@@ -75,8 +75,8 @@ define([
       return this.remote
         .setFindTimeout(intern.config.wc.pageLoadTimeout)
         .get(require.toUrl(url('/issues')))
-        .findByCssSelector('.js-SearchForm input')
-        .type('vladvlad')
+        .findByCssSelector('#js-SearchForm-input')
+        .type('www.fake_site_for_functional_tests.org')
         .end()
         .findByCssSelector('.js-SearchForm button').click()
         .end()
@@ -84,7 +84,7 @@ define([
         .sleep(3000)
         .findByCssSelector('.wc-IssueList:nth-of-type(1) a').getVisibleText()
         .then(function(text) {
-          assert.include(text, 'vladvlad', 'The search results show up on the page.');
+          assert.include(text, 'www.fake_site_for_functional_tests.org', 'The search results show up on the page.');
         })
         .end();
     },
