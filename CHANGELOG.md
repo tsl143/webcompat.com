@@ -1,3 +1,20 @@
+## 2.5.2 - 2016-05-31
+
+* Ensure label list UI is updated when labels are set [Pull #1073](https://github.com/webcompat/webcompat.com/pull/1073) [Issue #1045](https://github.com/webcompat/webcompat.com/issues/1045)
+* Make search bar distinct from background [Pull #1065](https://github.com/webcompat/webcompat.com/pull/1065) [Issue #1064](https://github.com/webcompat/webcompat.com/issues/1064)
+* Fix image uploads for issues [Pull #1067](https://github.com/webcompat/webcompat.com/pull/1067) [Issue #1063](https://github.com/webcompat/webcompat.com/pull/1063)
+
+## 2.5.1 - 2016-05-26
+
+* Scope labelSearch to actual anchor elm (not its wrapper) [Pull #1068](https://github.com/webcompat/webcompat.com/pull/1068) [Issue #1066](https://github.com/webcompat/webcompat.com/issues/1066)
+* Bandaid fix to allow for up to 100 comments per issue [Pull #1057](https://github.com/webcompat/webcompat.com/pull/1057) [Issue #1044](https://github.com/webcompat/webcompat.com/issues/1044)
+
+## 2.5.0 - 2016-05-20
+
+* Convert PNG to JPEG on the server [Pull #1052](https://github.com/webcompat/webcompat.com/pull/1052) [Issue #1051](https://github.com/webcompat/webcompat.com/issues/1051)
+* Upload images before submission [Pull #1053](https://github.com/webcompat/webcompat.com/pull/1053) [Issue #1049](https://github.com/webcompat/webcompat.com/issues/1049)
+* Include bmp and gif in the "remove image upload" regex [Pull #1056](https://github.com/webcompat/webcompat.com/pull/1056) [Issue #1055](https://github.com/webcompat/webcompat.com/issues/1055)
+
 ## 2.4.10 - 2016-05-04
 
 * Clear out screenshotData in showRemoveUpload [Pull #1040](https://github.com/webcompat/webcompat.com/pull/1040) [Issue #1039](https://github.com/webcompat/webcompat.com/issues/1039)

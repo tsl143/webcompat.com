@@ -29,6 +29,7 @@ JSON_MIME = 'application/json'
 
 
 class Upload(object):
+
     '''Class that abstracts over saving image and screenshot uploads.
 
     It performs a simple extension-based validation before saving to the
@@ -44,10 +45,10 @@ class Upload(object):
     def to_image_object(self, imagedata):
         '''Method to return a Pillow Image object from the raw imagedata.'''
         try:
-            # Is this a file uploaded via <input type=file>?
+            # Is this a file upload (i.e., issue form upload)?
             if isinstance(imagedata, FileStorage):
                 return Image.open(imagedata)
-            # Is this base64 encoded screenshot?
+            # Is this a base64 encoded image (i.e., bug report screenshot)?
             if (isinstance(imagedata, unicode) and
                     imagedata.startswith('data:image/')):
                 # Chop off 'data:image/.+;base64,' before decoding
@@ -59,7 +60,12 @@ class Upload(object):
             abort(415)
 
     def get_file_ext(self):
-        '''Method to return the file extension, as determined by Pillow.'''
+        '''Method to return the file extension, as determined by Pillow.
+
+        (But, we return jpg for png images, since we convert them always.)
+        '''
+        if self.image_object.format.lower() == 'png':
+            return 'jpg'
         return self.image_object.format.lower()
 
     def get_filename(self):
@@ -86,10 +92,12 @@ class Upload(object):
         # Optimize further the image compression for these formats
         if self.image_object.format in ['JPEG', 'JPG', 'JPE', 'PNG']:
             save_parameters['optimize'] = True
+            # Convert PNG to JPEG. See issue #1051
+            file_dest = 'jpg'.join(file_dest.rsplit('png', 1))
         # If animated GIF, aka duration > 0, add save_all parameter
         if (self.image_object.format == 'GIF' and
-           self.image_object.info['duration'] > 0):
-                save_parameters['save_all'] = True
+                self.image_object.info['duration'] > 0):
+            save_parameters['save_all'] = True
         # unpacking save_parameters
         self.image_object.save(file_dest, **save_parameters)
 
@@ -105,8 +113,8 @@ def upload():
     '''
     if 'image' in request.files and request.files['image'].filename:
         imagedata = request.files['image']
-    elif 'screenshot' in request.form:
-        imagedata = request.form['screenshot']
+    elif 'image' in request.form:
+        imagedata = request.form['image']
     else:
         # We don't know what you're trying to do, but it ain't gonna work.
         abort(501)

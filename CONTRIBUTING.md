@@ -212,6 +212,18 @@ sudo apt-get update
 sudo apt-get install python2.7 python2.7-dev
 ```
 
+In Ubuntu, sometimes even after installing Node.js, the command `node -v` does not show the installed version. To complete installation, a symbolic link has to be created to the sbin folder.
+
+```
+#remove old symbolic links if any 
+sudo rm -r /usr/bin/node
+
+#add new symbolic link
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo ln -s /usr/bin/nodejs /usr/sbin/node
+```
+
+
 ### Simple setup (Mac OS and Linux)
 #### Initializing Project source code
 
@@ -278,7 +290,10 @@ source env/bin/activate
 #  Linux: http://pillow.readthedocs.org/en/3.0.x/installation.html#linux-installation
 # install rest of dependencies
 pip install -r requirements.txt
+# In Ubuntu, if ImportError: No module named flask.ext.github occurs, it means the dependencies in requirements.txt are installed in /usr/lib instead of <project_repository>/env/python<version>/site-packages.
+# In this case, use virtual environment's pip from <project_repository>/env/lib/pip folder of the project repository instead of the global pip.
 ```
+
 
 #### Installing Grunt
 
@@ -403,6 +418,10 @@ The `firefox` binary will also need to be in your `PATH`. Here's how this can be
 ``` bash
 export PATH="/Applications/Firefox.app/Contents/MacOS/:$PATH"
 ```
+
+If you are a member of webcompat organisation in GitHub, edit `config/secrets.py`. The value of `ISSUES_REPO_URI` is the path of the repository containing test issues.
+
+Change the value to : `ISSUES_REPO_URI = 'webcompat/webcompat-tests/issues'`.
 
 Now start Selenium:
 

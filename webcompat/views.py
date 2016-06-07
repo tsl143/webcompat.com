@@ -33,7 +33,6 @@ from webcompat.db import User
 from webcompat import app
 from webcompat import github
 from webcompat.api.endpoints import get_rate_limit
-from webcompat.api.uploads import upload
 
 
 @app.teardown_appcontext
@@ -160,10 +159,6 @@ def create_issue():
     # copy the form so we can add the full UA string to it.
     form = request.form.copy()
     form['ua_header'] = request.headers.get('User-Agent')
-    # Do we have an image or screenshot ready to be uploaded?
-    if ((request.files['image'] and request.files['image'].filename) or
-       request.form.get('screenshot')):
-        form['image_upload'] = json.loads(upload()[0])
     if form.get('submit-type') == AUTH_REPORT:
         if g.user:  # If you're already authed, submit the bug.
             response = report_issue(form)
